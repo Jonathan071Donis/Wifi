@@ -4,125 +4,310 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Generador seguro de códigos QR para conexión Wi-Fi">
-  <meta name="theme-color" content="#007bff">
-  <title>Generador Seguro de QR para Wi-Fi</title>
+  <meta name="theme-color" content="#98FF98">
+  <title>QR WiFi Pro | Generador Seguro Avanzado</title>
   <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/10254/10254598.png">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="manifest" href="manifest.json">
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <h1><i class="fas fa-wifi"></i> Generador de QR para Wi-Fi</h1>
-      <p class="subtitle">Conecta dispositivos fácilmente con un código QR seguro</p>
+      <div class="logo-container">
+        <i class="fas fa-wifi logo-icon"></i>
+        <h1>QR WiFi Pro</h1>
+      </div>
+      <p class="subtitle">Genera códigos QR seguros para compartir tu conexión</p>
+      <div class="security-badge">
+        <i class="fas fa-shield-alt"></i>
+        <span>Protegido & Encriptado</span>
+      </div>
     </div>
     
     <form id="wifi-form" novalidate>
-      <div class="form-group">
-        <label for="ssid">
-          <i class="fas fa-network-wired"></i> Nombre de la Red (SSID):
-        </label>
-        <input type="text" id="ssid" name="ssid" placeholder="Ej: MiWiFi_5G" required 
-               minlength="1" maxlength="32" pattern="[^\s].*[^\s]">
-        <div class="error-message" id="ssid-error"></div>
-      </div>
-      
-      <div class="form-group">
-        <label for="encryption">
-          <i class="fas fa-lock"></i> Tipo de Seguridad:
-        </label>
-        <select id="encryption" name="encryption" required>
-          <option value="WPA">WPA/WPA2/WPA3 (recomendado)</option>
-          <option value="WEP">WEP (obsoleto)</option>
-          <option value="nopass">Sin contraseña (abierto)</option>
-        </select>
-      </div>
-      
-      <div class="form-group" id="password-group">
-        <label for="password">
-          <i class="fas fa-key"></i> Contraseña:
-        </label>
-        <div class="password-container">
-          <input type="password" id="password" name="password" 
-                 placeholder="Mínimo 8 caracteres" minlength="8" maxlength="63">
-          <span id="toggle-password" class="toggle-password" tabindex="0">
-            <i class="fas fa-eye"></i>
-          </span>
+      <div class="form-section">
+        <h3><i class="fas fa-network-wired"></i> Información de la Red</h3>
+        
+        <div class="form-group">
+          <label for="ssid">
+            <i class="fas fa-signal"></i> Nombre de la Red (SSID):
+          </label>
+          <input type="text" id="ssid" name="ssid" placeholder="Ej: MiWiFi_5G" required 
+                 minlength="1" maxlength="32" pattern="[^\s].*[^\s]">
+          <div class="input-hint">Máximo 32 caracteres, sin caracteres especiales</div>
+          <div class="error-message" id="ssid-error"></div>
         </div>
-        <div class="password-strength">
-          <div class="strength-bar"></div>
-          <div class="strength-text"></div>
-        </div>
-        <div class="error-message" id="password-error"></div>
-      </div>
-<!-- Añadir esto dentro del div.container, después del formulario -->
-<div class="wifi-history-section">
-  <h3><i class="fas fa-history"></i> Redes Recientes</h3>
-  <ul id="wifi-history-list" class="history-list"></ul>
-  <button id="clear-history" class="btn-text">
-      <i class="fas fa-trash-alt"></i> Limpiar Historial
-  </button>
-</div>
 
-      <div class="form-group">
-        <label class="hidden-network-container">
-          <span class="hidden-network-label">
-            <i class="fas fa-eye-slash"></i> Red oculta
-          </span>
-          <div class="toggle-switch">
-            <input type="checkbox" id="hidden" name="hidden">
-            <span class="slider"></span>
+        <div class="form-group">
+          <label for="encryption">
+            <i class="fas fa-lock"></i> Tipo de Seguridad:
+          </label>
+          <select id="encryption" name="encryption" required>
+            <option value="WPA">WPA/WPA2/WPA3 (Recomendado)</option>
+            <option value="WEP">WEP (Obsoleto)</option>
+            <option value="nopass">Sin contraseña (Abierto)</option>
+          </select>
+          <div class="security-info" id="security-info">
+            <i class="fas fa-info-circle"></i>
+            <span>WPA3 ofrece la mejor seguridad disponible</span>
           </div>
-        </label>
+        </div>
       </div>
 
+      <div class="form-section">
+        <h3><i class="fas fa-key"></i> Configuración de Acceso</h3>
+        
+        <div class="form-group" id="password-group">
+          <label for="password">
+            <i class="fas fa-key"></i> Contraseña:
+          </label>
+          <div class="password-container">
+            <input type="password" id="password" name="password" 
+                   placeholder="Mínimo 8 caracteres" minlength="8" maxlength="63">
+            <span id="toggle-password" class="toggle-password" tabindex="0">
+              <i class="fas fa-eye"></i>
+            </span>
+          </div>
+          <div class="password-strength">
+            <div class="strength-bar">
+              <div class="strength-fill"></div>
+            </div>
+            <div class="strength-labels">
+              <span class="strength-text"></span>
+              <span class="strength-percentage">0%</span>
+            </div>
+          </div>
+          <div class="password-requirements">
+            <div class="requirement" data-requirement="length">✓ Mínimo 8 caracteres</div>
+            <div class="requirement" data-requirement="uppercase">✓ Mayúsculas y minúsculas</div>
+            <div class="requirement" data-requirement="numbers">✓ Incluir números</div>
+            <div class="requirement" data-requirement="special">✓ Caracteres especiales</div>
+          </div>
+          <div class="error-message" id="password-error"></div>
+        </div>
 
+        <div class="advanced-options">
+          <div class="form-group">
+            <label class="hidden-network-container">
+              <div class="hidden-network-content">
+                <div class="hidden-network-info">
+                  <i class="fas fa-eye-slash"></i>
+                  <div>
+                    <span class="hidden-network-label">Red oculta</span>
+                    <span class="hidden-network-description">La red no transmite su nombre (SSID)</span>
+                  </div>
+                </div>
+                <div class="toggle-switch">
+                  <input type="checkbox" id="hidden" name="hidden">
+                  <span class="slider"></span>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <div class="form-group" id="network-type-group">
+            <label for="network-type">
+              <i class="fas fa-broadcast-tower"></i> Tipo de Red:
+            </label>
+            <select id="network-type" name="network-type">
+              <option value="auto">Automático (2.4GHz/5GHz)</option>
+              <option value="2.4ghz">Solo 2.4GHz</option>
+              <option value="5ghz">Solo 5GHz</option>
+            </select>
+          </div>
+        </div>
+      </div>
 
       <button type="submit" class="generate-btn">
-        <i class="fas fa-qrcode"></i> Generar QR
+        <i class="fas fa-qrcode"></i> 
+        <span class="btn-text">Generar QR Seguro</span>
+        <div class="btn-loading">
+          <div class="loading-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
       </button>
       
       <div class="security-tips">
-        <p><i class="fas fa-shield-alt"></i> <strong>Seguridad:</strong> Nunca compartas este QR en lugares públicos</p>
+        <div class="tip-header">
+          <i class="fas fa-shield-alt"></i>
+          <strong>Consejos de Seguridad</strong>
+        </div>
+        <ul class="tip-list">
+          <li>Nunca compartas este QR en lugares públicos</li>
+          <li>Usa contraseñas fuertes con mezcla de caracteres</li>
+          <li>Actualiza regularmente tu contraseña WiFi</li>
+          <li>Verifica quién tiene acceso a este código QR</li>
+        </ul>
       </div>
     </form>
+
+    <!-- Sección de Historial -->
+    <div class="wifi-history-section">
+      <div class="history-header">
+        <h3><i class="fas fa-history"></i> Redes Recientes</h3>
+        <span class="history-count" id="history-count">0 redes guardadas</span>
+      </div>
+      <div class="history-container">
+        <ul id="wifi-history-list" class="history-list"></ul>
+        <div class="history-empty" id="history-empty">
+          <i class="fas fa-wifi-slash"></i>
+          <p>No hay redes guardadas</p>
+          <span>Las redes que generes aparecerán aquí</span>
+        </div>
+      </div>
+      <div class="history-actions">
+        <button id="clear-history" class="btn-text">
+          <i class="fas fa-trash-alt"></i> Limpiar Historial
+        </button>
+        <button id="export-history" class="btn-text">
+          <i class="fas fa-download"></i> Exportar
+        </button>
+      </div>
+    </div>
   </div>
 
-  <!-- Modal -->
+  <!-- Modal QR -->
   <div id="modal" class="modal">
     <div class="modal-content">
-      <span id="close-modal" class="close" tabindex="0" aria-label="Cerrar">&times;</span>
-      <h2><i class="fas fa-qrcode"></i> Código QR Generado</h2>
-      <div class="qr-container">
-        <canvas id="qrcode" aria-label="Código QR para conexión Wi-Fi"></canvas>
+      <div class="modal-header">
+        <h2><i class="fas fa-qrcode"></i> Código QR Generado</h2>
+        <span id="close-modal" class="close" tabindex="0" aria-label="Cerrar">&times;</span>
       </div>
-      <div class="qr-info">
-        <p><strong>Red:</strong> <span id="qr-ssid"></span></p>
-        <p><strong>Tipo:</strong> <span id="qr-type"></span></p>
+      
+      <div class="qr-display">
+        <div class="qr-container">
+          <canvas id="qrcode" aria-label="Código QR para conexión Wi-Fi"></canvas>
+          <div class="qr-overlay" id="qr-overlay">
+            <i class="fas fa-lock"></i>
+            <span>QR Seguro</span>
+          </div>
+        </div>
+        
+        <div class="qr-info">
+          <div class="info-item">
+            <i class="fas fa-network-wired"></i>
+            <div>
+              <span class="info-label">Red WiFi</span>
+              <span id="qr-ssid" class="info-value"></span>
+            </div>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-shield-alt"></i>
+            <div>
+              <span class="info-label">Seguridad</span>
+              <span id="qr-type" class="info-value"></span>
+            </div>
+          </div>
+          <div class="info-item" id="qr-hidden-info">
+            <i class="fas fa-eye-slash"></i>
+            <div>
+              <span class="info-label">Visibilidad</span>
+              <span class="info-value">Red Oculta</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="modal-buttons">
-        <button id="download-png" class="download-btn">
-          <i class="fas fa-download"></i> Descargar PNG
-        </button>
-        <button id="download-pdf" class="download-btn">
-          <i class="fas fa-file-pdf"></i> Descargar PDF
-        </button>
-        <button id="print-qr" class="download-btn">
-          <i class="fas fa-print"></i> Imprimir
-        </button>
+
+      <div class="modal-actions">
+        <div class="action-group">
+          <button id="download-png" class="download-btn">
+            <i class="fas fa-download"></i> PNG
+          </button>
+          <button id="download-pdf" class="download-btn">
+            <i class="fas fa-file-pdf"></i> PDF
+          </button>
+          <button id="print-qr" class="download-btn">
+            <i class="fas fa-print"></i> Imprimir
+          </button>
+        </div>
+        <div class="action-group">
+          <button id="share-qr" class="share-btn">
+            <i class="fas fa-share-alt"></i> Compartir
+          </button>
+          <button id="new-qr" class="new-btn">
+            <i class="fas fa-plus"></i> Nuevo QR
+          </button>
+        </div>
       </div>
+
       <div class="security-warning">
-        <p><i class="fas fa-exclamation-triangle"></i> Protege este código QR como si fuera tu contraseña</p>
+        <div class="warning-header">
+          <i class="fas fa-exclamation-triangle"></i>
+          <strong>Advertencia de Seguridad</strong>
+        </div>
+        <p>Protege este código QR como si fuera tu contraseña. No lo compartas públicamente.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Confirmación para Limpiar Historial -->
+  <div id="confirm-clear-modal" class="modal confirm-modal">
+    <div class="modal-content confirm-modal-content">
+      <div class="confirm-modal-header">
+        <div class="confirm-icon">
+          <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <h3>¿Estás seguro de limpiar el historial?</h3>
+        <span id="confirm-close" class="close confirm-close">&times;</span>
+      </div>
+      
+      <div class="confirm-modal-body">
+        <div class="warning-message">
+          <i class="fas fa-info-circle"></i>
+          <p>Esta acción <strong>eliminará permanentemente</strong> todo tu historial de redes WiFi guardadas.</p>
+        </div>
+        
+        <div class="consequences">
+          <h4>Consecuencias:</h4>
+          <ul>
+            <li><i class="fas fa-times-circle"></i> Se perderán todas las redes guardadas</li>
+            <li><i class="fas fa-history"></i> No podrás recuperar esta información</li>
+            <li><i class="fas fa-redo"></i> Tendrás que volver a generar los códigos QR</li>
+          </ul>
+        </div>
+        
+        <div class="data-summary">
+          <div class="summary-item">
+            <span class="summary-label">Redes a eliminar:</span>
+            <span class="summary-value" id="networks-to-delete">0</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Última red guardada:</span>
+            <span class="summary-value" id="last-network-date">N/A</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="confirm-modal-actions">
+        <button id="cancel-clear" class="btn-cancel">
+          <i class="fas fa-times"></i> Cancelar
+        </button>
+        <button id="confirm-clear" class="btn-confirm">
+          <i class="fas fa-trash-alt"></i> Sí, Limpiar Historial
+        </button>
       </div>
     </div>
   </div>
 
   <!-- Loading spinner -->
   <div id="loading" class="loading">
-    <div class="spinner"></div>
-    <p>Generando código QR seguro...</p>
+    <div class="loading-content">
+      <div class="spinner"></div>
+      <p>Generando código QR seguro...</p>
+      <div class="loading-details">
+        <span>Encriptando información</span>
+        <div class="loading-progress">
+          <div class="progress-bar"></div>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <!-- Toast Notifications -->
+  <div id="toast" class="toast"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
